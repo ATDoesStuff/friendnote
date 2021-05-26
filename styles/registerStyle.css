@@ -1,0 +1,78 @@
+/*   ===== Informacion Autor =====  
+    Christopher Vega Mendez
+            4AVPr 
+        24/05/2021
+            DAES
+=====   Fin de Bloque   =====  */
+:root{
+    /* === COLOR PALETTE === */
+    --magnolia: #F7F0F5;
+    --brightNavyBlue: #3E78B2;
+    --oliveDrab3: #8A9933;
+    --citron: #99AA38;
+    --onyx: #37393A;
+    --richBlackFroga: #080708;
+
+    /* === FONTS === */
+    --title: "KoHo";
+    --main: "Nunito";
+}
+html{
+    margin: auto;
+}body{
+    background-color: var(--magnolia);
+}main{
+    font-family: var(--title);
+}.title{
+    text-align: center;
+    margin: 20px;
+    font-weight: 800;
+    color: var(--magnolia);
+}h1{
+    font-size: 2rem;
+    margin-top: 0;
+}h2{
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+.bloque{
+    background-color: var(--citron);
+    border: 3px solid var(--oliveDrab3);
+    border-radius: 15px 15px 15px 15px;
+    padding: 2rem;
+    width: max-content;
+    margin: auto;
+}
+.formRegister{
+    text-align:center;
+}.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}.inputRes{
+    height: 2rem;
+    width: 15rem;
+    border-radius: 5px 5px 5px 5px;
+}.submitBtn{
+    height: 2rem;
+    width: 13rem;
+    font-size: 1.2rem;
+    color: var(--onyx);
+    border-radius: 7.5px 7.5px 7.5px 7.5px;
+    font-weight: 800;
+}.dont{
+    border: 3px solid var(--oliveDrab3);
+    padding: 6px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: var(--magnolia);
+}.dont a{
+    text-decoration: none;
+    color: var(--brightNavyBlue);
+}.dont a:hover{
+    text-decoration: underline;
+}.dont p{
+    color: var(--onyx);
+}

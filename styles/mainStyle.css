@@ -1,0 +1,64 @@
+/*   ===== Informacion Autor =====  
+        Christopher Vega Mendez
+                4AVPr 
+             24/05/2021
+                DAES
+    =====   Fin de Bloque   =====  */
+:root{
+    /* === COLOR PALETTE === */
+    --magnolia: #F7F0F5;
+    --brightNavyBlue: #3E78B2;
+    --oliveDrab3: #8A9933;
+    --citron: #99AA38;
+    --onyx: #37393A;
+    --richBlackFroga: #080708;
+
+    /* === FONTS === */
+    --title: "KoHo";
+    --main: "Nunito";
+}
+/* ===== HEADER ===== */
+header{
+    font-family: var(--title);
+    margin: 0;
+    color: var(--magnolia);
+    background-image: linear-gradient(to bottom, var(--citron) 40%, var(--oliveDrab3) 100%);
+    padding: 0 1rem 60px 1rem;
+}nav a{
+    color: var(--aliceBlue);
+    text-decoration: none;
+}h1{
+    margin: 0;
+    padding: 1.25rem;
+    padding-top: 0;
+    float: left;
+}.mainIcon{
+    float: left;
+    height: 42px;
+    margin-top: 8px;
+}.navBtn{
+    color: var(--magnolia);
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+    float: right;    
+    margin-top: 8px;
+    background-color: var(--onyx);
+}.pfp{
+    width: 41px;
+    height: 41px;
+    border: 1px solid var(--onyx);
+}.username{
+    float: right;    
+    margin: 16px 10px;
+    font-size: 1.2rem;
+}
+
+/* ===== SETTINGS ===== */
+main{
+    background-color: var(--beauBlue);
+    margin: 0rem 3rem;
+    font-family: var(--main);
+}footer{
+    font-family: var(--title);
+}
