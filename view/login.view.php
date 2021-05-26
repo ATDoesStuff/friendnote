@@ -12,36 +12,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/mainStyle.css">
-    <link rel="stylesheet" href="../styles/dropdownNav.css">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/registerStyle.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=KoHo&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=KoHo&family=Nunito&display=swap" rel="stylesheet">  
     
-    <link rel="icon" href="../favicon.ico">
+    <link rel="icon" href="favicon.ico">
     
-    <script src="../scripts/dropdownNav.js"></script>
-    <script src="../scripts/confirmLogout.js"></script>
+    <script src="scripts/dropdownNav.js"></script>
+    <script src="scripts/confirmLogout.js"></script>
 
     <title>FriendNote</title>
 </head>
 <body>
-	<div class="">
+	<main class="bloque center">
+		<div class="title">
+			<h1>FriendNote</h1>
+			<h2>Login</h2>
+		</div>		
+		<form class="formRegister" name="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+			
+			<input class="inputRes" type="text" name="usuario" placeholder="Usuario"><br><br>
+			<input class="inputRes" type="password" name="password" placeholder="Contraseña"><br><br>
 
-		<h1>Iniciar Sesión</h1>
-
-		<form class="formulario" name="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-			<div class="form-group">
-				<i class="icono izquierda fa fa-user"></i><input class="usuario" type="text" name="usuario" placeholder="Usuario">
-			</div>
-
-			<div class="form-group">
-				<i class="icono izquierda fa fa-lock"></i><input class="password_btn" type="password" name="password" placeholder="Password">
-				<button class="submit-btn fa fa-arrow-right" onclick="login.submit()">
-			</div>
+			<button class="submitBtn" onclick="login.submit()" value=":)))))">Iniciar Sesion</button>
+		
+		</form>
 
 			<!-- Comprobamos si la variable errores esta seteada, si es asi mostramos los errores -->
 			<?php if(!empty($errores)): ?>
@@ -53,11 +52,10 @@
 			<?php endif; ?>
 		</form>
 
-		<p class="texto-registrate">
-			¿ Aun no tienes cuenta ?
+		<p class="dont">
+			¿Aun sin cuenta?
 			<a href="register.php">Regístrate</a>
 		</p>
-
 	</div>
 </body>
 </html>
