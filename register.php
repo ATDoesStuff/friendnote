@@ -1,51 +1,97 @@
-<?php session_start();
+<?php
+// Include config file
+require_once "config.php";
+ 
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Validate username
+    if(empty(trim($_POST["username"]))){
+        $username_err = "<br>Please enter a username.";
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
+        $username_err = "<br>Username can only contain letters,<br> numbers, and underscores.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE username = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $username_err = "<br>This username is already taken.";
+                } else{
+                    $username = trim($_POST["username"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
 
-if (isset($_SESSION['usuario'])) {
-	header('Location: index.php');
-	die();
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Validate password
+    if(empty(trim($_POST["password"]))){
+        $password_err = "<br>Please enter a password.";     
+    } elseif(strlen(trim($_POST["password"])) < 6){
+        $password_err = "<br>Password must have atleast 6 characters.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+    
+    // Validate confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = "<br>Please confirm password.";     
+    } else{
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($password_err) && ($password != $confirm_password)){
+            $confirm_password_err = "<br>Password did not match.";
+        }
+    }
+    
+    // Check input errors before inserting in database
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+         
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            
+            // Set parameters
+            $param_username = $username;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("location: login.php");
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Close connection
+    mysqli_close($link);
 }
-
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-	$usuario = str_replace(' ','' , filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING));
-	$password = $_POST['password'];
-	$password2 = $_POST['password2'];
-
-	$errores = '';
-
-	if (empty($usuario) or empty($password) or empty($password2)) {
-		$errores = '<li>Por favor rellena todos los datos correctamente</li>';
-	} else {
-
-		try {
-			$conexion = new PDO('mysql:host=localhost;dbname=friendnote', 'root', '');
-		} catch (PDOException $e) {
-			echo "Error:" . $e->getMessage();
-		}
-
-		$statement = $conexion->prepare('SELECT * FROM usuarios WHERE user = :usuario LIMIT 1');
-		$statement->execute(array(':usuario' => $usuario));
-
-		$resultado = $statement->fetch();
-
-		if ($resultado != false) {
-			$errores .= '<li>El nombre de usuario ya existe</li>';
-		}
-		$password = hash('sha512', $password);
-		$password2 = hash('sha512', $password2);
-
-		if ($password != $password2) {
-			$errores.= '<li>Las contraseñas no son iguales</li>';
-		}
-	}
-	if ($errores == '') {
-		$statement = $conexion->prepare('INSERT INTO usuarios (id, user, pass) VALUES (null, :usuario, :pass)');
-		$statement->execute(array(
-				':usuario' => $usuario,
-				':pass' => $password
-			));
-
-		header('Location: login.php');
-	}}
 require 'view/register.view.php';
 ?>

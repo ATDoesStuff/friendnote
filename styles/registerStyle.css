@@ -56,9 +56,9 @@ html{
     height: 2rem;
     width: 15rem;
     border-radius: 5px 5px 5px 5px;
-}.submitBtn{
+}input .submitBtn{
     height: 2rem;
-    width: 13rem;
+    width: 100%;
     font-size: 1.2rem;
     color: var(--onyx);
     border-radius: 7.5px 7.5px 7.5px 7.5px;
@@ -76,4 +76,9 @@ html{
     text-decoration: underline;
 }.dont p{
     color: var(--onyx);
+}
+
+span .invalid-feedback{
+    text-align: center;
+
 }

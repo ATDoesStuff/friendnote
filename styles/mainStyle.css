@@ -7,16 +7,36 @@
 :root{
     /* === COLOR PALETTE === */
     --magnolia: #F7F0F5;
-    --brightNavyBlue: #3E78B2;
+    --floralWhite: #FEF9EF;
+    --plainWhite: #ffff;
     --oliveDrab3: #8A9933;
     --citron: #99AA38;
+    --teaGreen: #C9DCB3;
     --onyx: #37393A;
-    --richBlackFroga: #080708;
 
     /* === FONTS === */
     --title: "KoHo";
     --main: "Nunito";
 }
+/* ===== MAIN SITE ===== */
+body{
+    height: 900px;
+    background-color: var(--floralWhite);
+}
+main{
+    margin: 0rem 20rem;
+    font-family: var(--main);
+}footer{
+    margin: 0%;
+    font-family: var(--title);
+    background-image: linear-gradient(to bottom, var(--citron) 40%, var(--oliveDrab3) 100%);
+    color: var(--magnolia);
+}footer p{
+    margin: 0;
+    padding: 8px;
+}
+/* ===== END MAIN SITE ===== */
+
 /* ===== HEADER ===== */
 header{
     font-family: var(--title);
@@ -53,12 +73,27 @@ header{
     margin: 16px 10px;
     font-size: 1.2rem;
 }
-
-/* ===== SETTINGS ===== */
-main{
-    background-color: var(--beauBlue);
-    margin: 0rem 3rem;
-    font-family: var(--main);
-}footer{
-    font-family: var(--title);
+/* ===== START ARTICLES ===== */
+section{
+    padding: 1rem;
+    text-align: center;
+    margin: auto;
+    background-color: var(--plainWhite);
+    border-left: 1px solid var(--teaGreen);
+    border-right: 1px solid var(--teaGreen);
+}.divUserPost{
+    margin: 1rem 0 1.7rem 0;
+    border-bottom: 1px solid var(--citron);
+}.pfpPost{
+    height: 40px;
+    float: left;
+    margin-right: 8px;
+}.datePost{
+    float: right;
 }
+section .shadow{
+    -webkit-box-shadow: 0px 0px 35px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 35px 5px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 35px 5px rgba(0,0,0,0.75);
+}
+/* ===== END ARTICLES ===== */

@@ -32,21 +32,23 @@
 		<div class="title">
 			<h1>FriendNote</h1>
 			<h2>Login</h2>
-		</div>		
-		<form class="formRegister" name="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-			
-			<input class="inputRes" type="text" name="usuario" placeholder="Usuario"><br><br>
-			<input class="inputRes" type="password" name="password" placeholder="Contraseña"><br><br>
+		</div>
+				
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-			<button class="submitBtn" onclick="login.submit()" value=":)))))">Iniciar Sesion</button>
-		
-		</form>
+			<input type="text" name="username" class="inputRes" value="<?php echo $username; ?>" placeholder="Usuario"><br><br>
+			<input type="password" name="password" class="inputRes" placeholder="Contraseña"><br><br>
+
+			<input type="submit" class="submitBtn" value="Login :)">
+
+        </form>
 
 			<!-- Comprobamos si la variable errores esta seteada, si es asi mostramos los errores -->
 			<?php if(!empty($errores)): ?>
 				<div class="error">
 					<ul>
-						<?php echo $errores; ?>
+						<p class="invalid-feedback"><?php echo $username_err; ?></p>
+						<p class="invalid-feedback"><?php echo $password_err; ?></p>
 					</ul>
 				</div>
 			<?php endif; ?>
@@ -56,6 +58,14 @@
 			¿Aun sin cuenta?
 			<a href="register.php">Regístrate</a>
 		</p>
+
+		<?php 
+        if(!empty($login_err)){
+            echo '<div class="alert alert-danger">' . $login_err . '</div>';
+        }        
+        ?>
+
+        
 	</div>
 </body>
 </html>
