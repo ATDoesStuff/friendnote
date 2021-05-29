@@ -24,7 +24,7 @@
     <link rel="icon" href="favicon.ico">
     
     <script src="scripts/dropdownNav.js"></script>
-    <script src="scripts/confirmLogout.js"></script>
+    <script src="scripts/confirms.js"></script>
 
     <title>FriendNote</title>
 </head>
@@ -38,14 +38,14 @@
         </div>
         <nav>
             <img src="imgTest.jpg" alt="pfp" class="navBtn pfp">
-            <p class="username">Username Test</p>
+            <p class="username"><?php echo htmlspecialchars($_SESSION["username"]); ?></p>
             
             <div class="dropdown">
                 <button class="accountSettings dropbtn navBtn" onclick="dDownNav()">
                     ▼
                 </button>
                 <div id="dropDownContent" class="dropdown-content">
-                    <a href="accountSettings.html">Account Settings</a>
+                    <a href="account.php">Account Settings</a>
                     <a href="logout.php" onclick="return confirmLogout()">Log Out</a>
                 </div>
             </div>
@@ -54,35 +54,59 @@
     <!-- ===== FIN DE NAVEGACION ===== -->
 
     <!-- ===== 🐊INICIO PAGINA PRINCIPAL🐊 ===== -->
-    <div class="contenedor">
-		<form class="formulario" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
-			
-			<label for="foto">Seleciona tu foto</label><br>
-			<input type="file" name="foto" id="foto"><br>
+    <main>
+        <section>
+            <h3 style="text-align: left;">Your Posts:</h3>
+        </section>
+        <?php
 
-			<label for="titulo">Titulo de la foto</label><br>
-			<input type="text" name="titulo" id="titulo"><br>
+        require "config.php";
+        $username = $_SESSION["username"];
+        $sql = "SELECT * FROM globalfeed ORDER BY id DESC";
+        $result = $link->query($sql);
+        if ($result -> num_rows > 0){
 
-			<label for="texto">Descripcion:</label><br>
-			<textarea name="texto" name="foto" id="texto" placeholder="Ingresa una descripcion de la imagen"></textarea><br>
-			
-			<?php // 
-			 if (isset($error)): ?>
-				<p class="error"><?php echo $error; ?></p>
-			<?php endif; ?>
+            $counter = 0;
 
-		<table>
-			<input class="submit" type="submit" value="Subir Foto">
-		</form>
-		<form class="formulario" action="index.php">
-			<input class="submit" type="submit" value="Ir a Inicio">
-		</form>
-		</table>
-	</div>
+            while($row = $result -> fetch_assoc()){
+                if ($row["by_user"] == $_SESSION["username"]){
+                    echo "<section>";
+                    if ($row["edited"] == 1){
+                        echo "<p style='float:right'>" . $row["posted_at"] . "(Edited*)</p>";
+                    } else if ($row["edited"] == 0){
+                        echo "<p style='float:right'>" . $row["posted_at"] . "</p>";
+                    };
+                    echo "<img src= 'imgTest.jpg' alt='pfpTestPost' class='pfpPost'>";
+                    echo "<p style='text-align: left;'>" . $row["by_user"] .  " said:</p>";
+        
+                    echo "<div class='divUserPost'></div>";
+        
+                    echo "<p>" . $row["message"] . "</p>";
 
-	<footer>
-		<p class="copyright">Galeria creada por autor</p>
-	</footer>
-    <!-- ===== FIN DE PAGINA ===== -->
+                    echo "<a class='editBtn' href='edit.php?id=" . $row['id'] . "'>Edit</a>";
+                    echo "<a onclick='return confirmDelete()' class='deleteBtn' href='delete.php?id=" . $row['id'] . "'>Delete</a>";
+                    
+                    echo "</section>";
+                    $counter = $counter + 1;
+                }
+            }   
+        }if ($counter == 0) {
+            $row = "";
+            echo "<section>";
+            echo "<img src= 'imgTest.jpg' alt='pfpTestPost' class='pfpPost'>";
+            echo "<p style='text-align: left;'> Chris Vega said:</p>";
+            echo "<div class='divUserPost'></div>";
+            echo "<p> Heyaaa, looks like there ain't any posts here yet... Why don't ya' post something nice?</p>";
+            echo "</section>";
+        };
+        ?>
+    </main>
+    <!-- ===== FIN DE PAGINA PRINCIPAL ===== -->
+
+    <!-- ===== PIE DE PAGINA ===== -->
+    <footer>
+        <p>made entirely by @ATDoesStuff, not a single soul helped him :)</p>
+    </footer>
+    <!-- ===== FIN DE PIE DE PAGINA ===== -->
 </body>
 </html>

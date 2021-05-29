@@ -1,9 +1,9 @@
 /*   ===== Informacion Autor =====  
-        Christopher Vega Mendez
-                4AVPr 
-             24/05/2021
-                DAES
-    =====   Fin de Bloque   =====  */
+    Christopher Vega Mendez
+            4AVPr 
+            24/05/2021
+            DAES
+=====   Fin de Bloque   =====  */
 :root{
     /* === COLOR PALETTE === */
     --magnolia: #F7F0F5;
@@ -20,11 +20,10 @@
 }
 /* ===== MAIN SITE ===== */
 body{
-    height: 900px;
     background-color: var(--floralWhite);
 }
 main{
-    margin: 0rem 20rem;
+    margin: 0rem;
     font-family: var(--main);
 }footer{
     margin: 0%;
@@ -73,8 +72,60 @@ header{
     margin: 16px 10px;
     font-size: 1.2rem;
 }
+/* ===== END HEADER ===== */
+
+/* ===== MESSAGE POSTING ===== */
+.posting{
+    margin-bottom: 2px;
+    text-align: center;
+}.msgPost{
+    background-color: var(--bgLog);
+    height: 45%;
+    width: 90%;
+    margin: 5px;
+    overflow-wrap: break-word;
+    resize: none;
+
+    border: 1.5px solid var(--oliveDrab3);
+    border-radius: 5px 5px 5px 5px ;
+}
+.submitBtn{
+    border: 2px outset var(--citron);
+    border-radius: 10px 10px 10px 10px ;
+    padding: 1% 2%;
+    background-color: white;
+}.submitBtn:active{
+    border: 3px inset var(--citron);
+}
+.editBtn{
+    border: 2px outset var(--citron);
+    border-radius: 10px 10px 10px 10px ;
+    padding: 0.5% 1%;
+    color: white;
+    text-decoration: none;
+    background-color: #52a9ff;
+}.editBtn:active{
+    border: 2px inset var(--citron);
+    text-decoration: underline;
+}.deleteBtn{
+    border: 2px outset var(--citron);
+    border-radius: 10px 10px 10px 10px ;
+    padding: 0.5% 1%;
+    color: white;
+    text-decoration: none;
+    background-color: #ff5252;
+}.deleteBtn:active{
+    border: 2px inset var(--citron);
+    text-decoration: underline;
+}
+/* ===== END MESSAGE POSTING ===== */
+
 /* ===== START ARTICLES ===== */
 section{
+
+    margin: auto;
+    width: 60%;
+
     padding: 1rem;
     text-align: center;
     margin: auto;

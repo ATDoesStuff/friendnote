@@ -24,7 +24,7 @@
     <link rel="icon" href="favicon.ico">
     
     <script src="scripts/dropdownNav.js"></script>
-    <script src="scripts/confirmLogout.js"></script>
+    <script src="scripts/confirms.js"></script>
 
     <title>FriendNote</title>
 </head>
@@ -38,7 +38,7 @@
         </div>
         <nav>
             <img src="imgTest.jpg" alt="pfp" class="navBtn pfp">
-            <p class="username">Username Test</p>
+            <p class="username"><?php echo htmlspecialchars($_SESSION["username"]); ?></p>
             
             <div class="dropdown">
                 <button class="accountSettings dropbtn navBtn" onclick="dDownNav()">
@@ -55,20 +55,53 @@
 
     <!-- ===== 🐊INICIO PAGINA PRINCIPAL🐊 ===== -->
     <main>
-        <section>
-            <img src="imgTest.jpg" alt="pfpTestPost" class="pfpPost">
-            <p style="text-align: left;">Chris Vega Mendez 🐊 said:</p>
-            <div class="divUserPost"></div>
-            <p>Text test #1, not php, just seeing the design</p>
-        </section>
-        <section>
-            <img src="imgTest.jpg" alt="phpTestPost2" class="pfpPost">
-            <p style="text-align: left;">Chris Vega Mendez 🐊 said:</p>
-            <div class="divUserPost"></div>
-            <p>
-            still just testing, not real
-            </p>
-        </section>
+    <section>
+        <h2 class="posting">Post Something!</h2>
+        <form action="insert.php" method="POST">
+                
+                <textarea type="text" class="msgPost" placeholder="En que piensas?" name="mensajePOST"></textarea> <br><br>
+                <input type="submit" class="submitBtn" value="Enviar!">
+        </form>
+
+        <div class='divUserPost'></div>
+        
+    </section>
+    
+    <?php
+
+        require "config.php";
+        $sql = "SELECT * FROM globalfeed ORDER BY id DESC";
+        $result = $link->query($sql);
+        if ($result -> num_rows > 0){
+
+            while($row = $result -> fetch_assoc()){
+            echo "<section>";
+
+            if ($row["edited"] == 1){
+                echo "<p style='float:right'>" . $row["posted_at"] . " (Edited*)</p>";
+            } else if ($row["edited"] == 0){
+                echo "<p style='float:right'>" . $row["posted_at"] . "</p>";
+            };
+            echo "<img src= 'imgTest.jpg' alt='pfpTestPost' class='pfpPost'>";
+            echo "<p style='text-align: left;'>" . $row["by_user"] .  " said:</p>";
+
+            echo "<div class='divUserPost'></div>";
+
+            echo "<p>" . $row["message"] . "</p>";
+            
+            echo "</section>";
+            };
+
+        } else {
+            // Default message in case theres no posts on feed 🐊 
+            echo "<section>";
+            echo "<img src= 'imgTest.jpg' alt='pfpTestPost' class='pfpPost'>";
+            echo "<p style='text-align: left;'> Chris Vega said:</p>";
+            echo "<div class='divUserPost'></div>";
+            echo "<p> Heyaaa, looks like there ain't any posts here yet... Why don't ya' post something nice?</p>";
+            echo "</section>";
+        }
+    ?>
     </main>
     <!-- ===== FIN DE PAGINA PRINCIPAL ===== -->
 
