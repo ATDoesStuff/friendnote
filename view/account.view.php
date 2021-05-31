@@ -105,7 +105,7 @@
 
     <!-- ===== PIE DE PAGINA ===== -->
     <footer>
-        <p>made entirely by @ATDoesStuff, not a single soul helped him :)</p>
+        <p>EQUIPO 6 FRIENDNOTE :)</p>
     </footer>
     <!-- ===== FIN DE PIE DE PAGINA ===== -->
 </body>
