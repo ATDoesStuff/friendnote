@@ -13,10 +13,6 @@
 
     $con = new mysqli($host, $user, $pass, $dataBase);
 
-    if ($con){
-        echo "<script> console.log('Succesfully connected!'); </script>";
-    };
-
     $message = $_POST["mensajePOST"];
     $username = $_SESSION["username"];
 
